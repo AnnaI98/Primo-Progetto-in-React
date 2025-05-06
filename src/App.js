@@ -25,9 +25,12 @@ class App extends Component {
   this.setState({ cards: updateCards });
 }
 
-  handleIncrement = card =>{
-    const cards =[...this.state.cards];
-    const id = cards.indexOf(card);
+handleIncrement = (card) => {
+  const updateCards = [...this.state.cards];
+  const id = updateCards.indexOf(card);
+    updateCards[id] = { ...updateCards[id] }; 
+    updateCards[id].Totale++;
+    this.setState({ cards: updateCards });
   }
 
   render(){
@@ -35,17 +38,19 @@ class App extends Component {
     <>
  <Navbar />
  <div className="container">
-<h1>Concerti disponibili</h1>
+<h1 className="text-center mt-5 mb-5">Concerti disponibili</h1>
 <hr />
 
 <div className="row">
   {this.state.cards.map(card => (
+     <div className="col-sm-12 col-md-6 col-lg-4 mb-4" key={card.id}>
     <Card
-      key={card.id}
+      
       onDelete={this.HandleDelete}
-      onIncrement={this.handleIncrement}
+      onBuy={this.handleIncrement}
       card= {card}
     />
+    </div>
   ))}
 </div>
  </div>
