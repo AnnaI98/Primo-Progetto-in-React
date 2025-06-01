@@ -180,4 +180,3 @@ function TicketSelector({ cards, onBuy, onDelete }) {
 export default TicketSelector;
 
 
-

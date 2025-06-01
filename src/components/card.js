@@ -1,25 +1,87 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 function Card(props) {
   return (
-    <div className="col">
-      <div className="Card" style={{ width: '18rem', textAlign: 'center', borderRadius: '23px' }}>
-        <button
-          onClick={() => props.onBuy(props.card)}
-          className="btn w-100 mb-2"
+    <div className="col d-flex justify-content-center mb-4">
+      <div
+        className="card shadow-sm"
+        style={{
+          width: '18rem',
+          borderRadius: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
+          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          cursor: 'pointer',
+          backgroundColor: '#ffffff',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = 'translateY(-10px)';
+          e.currentTarget.style.boxShadow = '0 12px 24px rgba(30, 144, 255, 0.4)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 4px 8px rgba(0,0,0,0.1)';
+        }}
+      >
+        <img
+          src={props.card.immagine}
+          alt={props.card.nome}
           style={{
-            backgroundColor: '#ADFF2F', 
-            color: 'black', 
-            border: 'none', 
+            borderRadius: '20px 20px 0 0',
+            height: '180px',
+            objectFit: 'cover',
+            boxShadow: 'inset 0 0 40px rgba(30,144,255,0.15)',
           }}
+        />
+        <div
+          className="card-body d-flex flex-column"
+          style={{ flexGrow: 1, padding: '1.25rem' }}
         >
-          Acquista <span className="badge badge-light">{props.card.Totale}</span>
-        </button>
-        <img src={props.card.immagine} className="card-img-top" alt={props.card.nome} style={{ borderRadius: '23px' }} />
-        <div className="card-body">
-          <h5 className="card-title">{props.card.nome}</h5>
-          <p className="card-text">€{props.card.prezzo}</p>
-          <button onClick={() => props.onDelete(props.card.id)} className="btn btn-outline-danger w-100">Cancella</button>
+          <h5
+            className="card-title"
+            style={{
+              flexShrink: 0,
+              fontWeight: '700',
+              color: '#1e90ff',
+              marginBottom: '0.5rem',
+              textShadow: '0 1px 2px rgba(30,144,255,0.3)',
+            }}
+          >
+            {props.card.nome}
+          </h5>
+          <p
+            className="card-text"
+            style={{
+              flexShrink: 0,
+              fontWeight: '600',
+              fontSize: '1.15rem',
+              color: '#333',
+              marginBottom: 'auto',
+            }}
+          >
+            €{props.card.prezzo.toFixed(2)}
+          </p>
+          <div style={{ flexGrow: 1 }}></div>
+          <Link
+            to={`/ticket/${props.card.id}`}
+            className="btn"
+            style={{
+              backgroundColor: '#1e90ff',
+              color: 'white',
+              borderRadius: '12px',
+              padding: '12px 0',
+              fontWeight: '700',
+              fontSize: '1rem',
+              textDecoration: 'none',
+              boxShadow: '0 4px 12px rgba(30,144,255,0.35)',
+              transition: 'background-color 0.3s ease',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#0056b3')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#1e90ff')}
+          >
+            Seleziona
+          </Link>
         </div>
       </div>
     </div>
@@ -27,3 +89,6 @@ function Card(props) {
 }
 
 export default Card;
+
+
+
